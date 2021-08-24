@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Youtube from "../apis/Youtube";
+import youtube from "../apis/Youtube";
+import Header from "./Header";
 import SearchBar from "./SearchBar";
 import VideoDetail from "./VideoDetail";
-import VideoItem from "./VideoItem";
 import VideoList from "./VideoList";
 
 const App = () => {
@@ -10,13 +10,14 @@ const App = () => {
   const [selectedVideo, setSelectedVideo] = useState("");
 
   const onSearchTermSubmit = async (term) => {
-    const response = await Youtube.get("/search", {
+    const response = await youtube.get("search", {
       params: {
         q: term,
       },
     });
     // console.log(response);
     setVideos(response.data.items);
+    setSelectedVideo(response.data.items[0]);
   };
 
   const onVideoSelect = (video) => {
@@ -25,9 +26,18 @@ const App = () => {
 
   return (
     <div className="ui container">
+      <Header />
       <SearchBar onFormSubmit={onSearchTermSubmit} />
-      <VideoDetail video={selectedVideo} />
-      <VideoList videos={videos} onVideoSelect={onVideoSelect} />
+      <div className="ui grid">
+        <div className="ui row">
+          <div className="eleven wide column">
+            <VideoDetail video={selectedVideo} />
+          </div>
+          <div className="five wide column">
+            <VideoList videos={videos} onVideoSelect={onVideoSelect} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

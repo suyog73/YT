@@ -4,7 +4,7 @@ import "./VideoItem.css";
 const VideoItem = (props) => {
   const { video, onVideoSelect } = props;
 
-  console.log(video);
+  // console.log(video);
   const onVideoClick = () => {
     onVideoSelect(video);
   };
@@ -14,7 +14,7 @@ const VideoItem = (props) => {
       <img
         className="ui image"
         src={video.snippet.thumbnails.medium.url}
-        alt={video.snippet.thumbnails.title}
+        alt={video.snippet.title}
       />
       <div className="content">
         <div className="header">{video.snippet.title}</div>

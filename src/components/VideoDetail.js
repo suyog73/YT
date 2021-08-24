@@ -2,7 +2,7 @@ import React from "react";
 
 const VideoDetail = (props) => {
   if (!props.video) {
-    return <div>Loading...</div>;
+    return <div>Type to search and Hit Enter</div>;
   }
 
   const videoSrc = `https://www.youtube.com/embed/${props.video.id.videoId}`;
@@ -10,7 +10,7 @@ const VideoDetail = (props) => {
   return (
     <div>
       <div className="ui embed">
-        <iframe src={videoSrc}></iframe>
+        <iframe title="video player" src={videoSrc}></iframe>
       </div>
       <div className="ui segment">
         <h4 className="ui header"> {props.video.snippet.title}</h4>
